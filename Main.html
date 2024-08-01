@@ -1,0 +1,365 @@
+<html><head><base href="https://web.simulator.ru/torgi-inspired/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Торги Онлайн - Главная</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f0f2f5;
+  }
+  .header {
+    background: linear-gradient(135deg, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  .nav {
+    background-color: #fff;
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  .nav-links {
+    display: flex;
+  }
+  .nav a {
+    color: #333;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  .nav a:hover, .nav a.active {
+    background-color: #e0e0e0;
+  }
+  .login-btn {
+    background-color: #2989d8;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  .login-btn:hover {
+    background-color: #1e5799;
+  }
+  .main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  .hero {
+    background-image: url('https://via.placeholder.com/1200x400?text=Торги+Онлайн');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  .hero-content {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    border-radius: 8px;
+  }
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  .cta-button {
+    display: inline-block;
+    background-color: #2989d8;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  .cta-button:hover {
+    background-color: #1e5799;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  .feature {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #2989d8;
+  }
+  .recent-auctions {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .auction-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .auction-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .auction-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+  .footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    border-radius: 8px;
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2989d8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .form-group button:hover {
+    background-color: #1e5799;
+  }
+</style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Торги Онлайн</div>
+    <p>Электронная площадка для проведения торгов</p>
+  </header>
+
+  <nav class="nav">
+    <div class="nav-container">
+      <div class="nav-links">
+      <a href="C:\Users\Пользователь\Downloads\Сайт\Main.html" class="active">Главная</a>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\auctions.html">Аукционы</a>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\tenders.html">Тендеры</a>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\property.html">Имущество</a>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\about.html">О нас</a>
+      </div>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\login.html" class="login-btn" id="loginBtn">Войти</a>
+    </div>
+  </nav>
+
+  <main class="main">
+    <section class="hero fade-in">
+      <div class="hero-content">
+        <h1>Добро пожаловать на Торги Онлайн</h1>
+        <p>Ваша надежная платформа для участия в электронных торгах и аукционах</p>
+        <a href="C:\Users\Пользователь\Downloads\Сайт\logout.html" class="cta-button">Начать участие</a>
+      </div>
+    </section>
+
+    <section class="features fade-in">
+      <div class="feature">
+        <div class="feature-icon">🏆</div>
+        <h2>Широкий выбор</h2>
+        <p>Тысячи актуальных лотов в различных категориях</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <h2>Безопасность</h2>
+        <p>Гарантированная защита ваших данных и транзакций</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📊</div>
+        <h2>Прозрачность</h2>
+        <p>Открытый доступ к информации о торгах и их результатах</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚀</div>
+        <h2>Удобство</h2>
+        <p>Интуитивно понятный интерфейс и быстрая работа системы</p>
+      </div>
+    </section>
+
+    <section class="recent-auctions fade-in">
+      <h2>Недавние аукционы</h2>
+      <div class="auction-list">
+        <div class="auction-item">
+          <img src="https://via.placeholder.com/150?text=Лот+1" alt="Лот 1">
+          <h3>Офисное помещение</h3>
+          <p>Стартовая цена: 5 000 000 ₽</p>
+        </div>
+        <div class="auction-item">
+          <img src="https://via.placeholder.com/150?text=Лот+2" alt="Лот 2">
+          <h3>Автомобиль премиум-класса</h3>
+          <p>Стартовая цена: 3 500 000 ₽</p>
+        </div>
+        <div class="auction-item">
+          <img src="https://via.placeholder.com/150?text=Лот+3" alt="Лот 3">
+          <h3>Производственное оборудование</h3>
+          <p>Стартовая цена: 2 000 000 ₽</p>
+        </div>
+        <div class="auction-item">
+          <img src="https://via.placeholder.com/150?text=Лот+4" alt="Лот 4">
+          <h3>Земельный участок</h3>
+          <p>Стартовая цена: 1 500 000 ₽</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2023 Торги Онлайн. Все права защищены.</p>
+  </footer>
+
+  <!-- Модальное окно для входа -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Вход в систему</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">Имя пользователя:</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Пароль:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+          <button type="submit">Войти</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      fadeElements.forEach((element, index) => {
+        setTimeout(() => {
+          element.style.opacity = '1';
+        }, index * 200);
+      });
+
+      // Модальное окно для входа
+      const modal = document.getElementById('loginModal');
+      const btn = document.getElementById('loginBtn');
+      const span = document.getElementsByClassName('close')[0];
+      const loginForm = document.getElementById('loginForm');
+
+      btn.onclick = function() {
+        modal.style.display = 'block';
+      }
+
+      span.onclick = function() {
+        modal.style.display = 'none';
+      }
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      }
+
+      loginForm.onsubmit = function(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        // Здесь должна быть логика проверки учетных данных
+        console.log('Попытка входа:', username, password);
+        alert('Функция входа в разработке. Спасибо за интерес!');
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

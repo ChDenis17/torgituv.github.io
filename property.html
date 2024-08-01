@@ -1,0 +1,347 @@
+<html><head><base href="https://web.simulator.ru/torgi-inspired/property">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Имущество - Торги Онлайн</title>
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #333;
+  }
+  .header {
+    background: linear-gradient(135deg, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .logo {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .nav {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .nav a {
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  .nav a:hover, .nav a.active {
+    background-color: #e0e0e0;
+  }
+  .nav a.active {
+    font-weight: bold;
+    color: #2989d8;
+  }
+  .content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .filter-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .filter-group label {
+    margin-right: 10px;
+  }
+  .filter-group select, .filter-group input {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .property-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .property-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  .property-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  .property-details {
+    padding: 15px;
+  }
+  .property-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .property-price {
+    font-size: 1.1em;
+    color: #2989d8;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .property-info {
+    font-size: 0.9em;
+    color: #666;
+  }
+  .property-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  .status-active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  .status-upcoming {
+    background-color: #2196F3;
+    color: white;
+  }
+  .status-sold {
+    background-color: #f44336;
+    color: white;
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #2989d8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .pagination button:hover {
+    background-color: #1e5799;
+  }
+  .pagination button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+</style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Торги Онлайн</div>
+    <p>Электронная площадка для проведения торгов</p>
+  </header>
+  
+  <nav class="nav">
+      <a href="C:\Users\Пользователь\Downloads\Сайт\Main.html" class="active">Главная</a>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\auctions.html">Аукционы</a>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\tenders.html">Тендеры</a>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\property.html">Имущество</a>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\about.html">О нас</a>
+  </nav>
+  
+  <main class="content">
+    <h1>Каталог имущества</h1>
+    
+    <div class="filters">
+      <div class="filter-group">
+        <label for="property-type">Тип имущества:</label>
+        <select id="property-type">
+          <option value="all">Все типы</option>
+          <option value="residential">Жилая недвижимость</option>
+          <option value="commercial">Коммерческая недвижимость</option>
+          <option value="land">Земельные участки</option>
+          <option value="vehicles">Транспортные средства</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="price-range">Ценовой диапазон:</label>
+        <select id="price-range">
+          <option value="all">Все цены</option>
+          <option value="0-1000000">До 1 000 000 ₽</option>
+          <option value="1000000-5000000">1 000 000 ₽ - 5 000 000 ₽</option>
+          <option value="5000000-10000000">5 000 000 ₽ - 10 000 000 ₽</option>
+          <option value="10000000+">Свыше 10 000 000 ₽</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="status">Статус:</label>
+        <select id="status">
+          <option value="all">Все статусы</option>
+          <option value="active">Активные торги</option>
+          <option value="upcoming">Предстоящие торги</option>
+          <option value="sold">Проданные</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="search">Поиск:</label>
+        <input type="text" id="search" placeholder="Введите ключевое слово">
+      </div>
+    </div>
+    
+    <div class="property-grid" id="property-container">
+      <div class="property-card">
+        <img src="https://via.placeholder.com/300x200.png?text=Квартира+в+центре+города" alt="Квартира в центре города" class="property-image">
+        <div class="property-details">
+          <div class="property-title">Квартира в центре города</div>
+          <div class="property-price">5 500 000 ₽</div>
+          <div class="property-info">
+            <p>Площадь: 65 м²</p>
+            <p>Этаж: 5/9</p>
+            <p>Адрес: ул. Центральная, д. 10</p>
+          </div>
+          <span class="property-status status-active">Активные торги</span>
+        </div>
+      </div>
+      
+      <div class="property-card">
+        <img src="https://via.placeholder.com/300x200.png?text=Офисное+помещение" alt="Офисное помещение" class="property-image">
+        <div class="property-details">
+          <div class="property-title">Офисное помещение</div>
+          <div class="property-price">12 000 000 ₽</div>
+          <div class="property-info">
+            <p>Площадь: 150 м²</p>
+            <p>Этаж: 3</p>
+            <p>Адрес: ул. Деловая, д. 5</p>
+          </div>
+          <span class="property-status status-upcoming">Предстоящие торги</span>
+        </div>
+      </div>
+      
+      <div class="property-card">
+        <img src="https://via.placeholder.com/300x200.png?text=Земельный+участок" alt="Земельный участок" class="property-image">
+        <div class="property-details">
+          <div class="property-title">Земельный участок</div>
+          <div class="property-price">2 800 000 ₽</div>
+          <div class="property-info">
+            <p>Площадь: 1500 м²</p>
+            <p>Назначение: ИЖС</p>
+            <p>Адрес: д. Лесная, уч. 15</p>
+          </div>
+          <span class="property-status status-active">Активные торги</span>
+        </div>
+      </div>
+      
+      <div class="property-card">
+        <img src="https://via.placeholder.com/300x200.png?text=Автомобиль+Mercedes-Benz" alt="Автомобиль Mercedes-Benz" class="property-image">
+        <div class="property-details">
+          <div class="property-title">Автомобиль Mercedes-Benz E-class</div>
+          <div class="property-price">3 200 000 ₽</div>
+          <div class="property-info">
+            <p>Год выпуска: 2019</p>
+            <p>Пробег: 50 000 км</p>
+            <p>Состояние: отличное</p>
+          </div>
+          <span class="property-status status-sold">Продано</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pagination">
+      <button disabled>←</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>→</button>
+    </div>
+  </main>
+
+  <script>
+    const propertyTypeSelect = document.getElementById('property-type');
+    const priceRangeSelect = document.getElementById('price-range');
+    const statusSelect = document.getElementById('status');
+    const searchInput = document.getElementById('search');
+    const propertyContainer = document.getElementById('property-container');
+
+    function filterProperties() {
+      const propertyType = propertyTypeSelect.value;
+      const priceRange = priceRangeSelect.value;
+      const status = statusSelect.value;
+      const searchTerm = searchInput.value.toLowerCase();
+
+      const propertyCards = propertyContainer.querySelectorAll('.property-card');
+
+      propertyCards.forEach(card => {
+        const cardType = card.querySelector('.property-title').textContent.toLowerCase();
+        const cardPrice = parseFloat(card.querySelector('.property-price').textContent.replace(/[^0-9.-]+/g,""));
+        const cardStatus = card.querySelector('.property-status').textContent.toLowerCase();
+        const cardText = card.textContent.toLowerCase();
+
+        const typeMatch = propertyType === 'all' || cardType.includes(propertyType);
+        const priceMatch = priceRange === 'all' || 
+                           (priceRange === '0-1000000' && cardPrice <= 1000000) ||
+                           (priceRange === '1000000-5000000' && cardPrice > 1000000 && cardPrice <= 5000000) ||
+                           (priceRange === '5000000-10000000' && cardPrice > 5000000 && cardPrice <= 10000000) ||
+                           (priceRange === '10000000+' && cardPrice > 10000000);
+        const statusMatch = status === 'all' || cardStatus.includes(status);
+        const searchMatch = searchTerm === '' || cardText.includes(searchTerm);
+
+        if (typeMatch && priceMatch && statusMatch && searchMatch) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    propertyTypeSelect.addEventListener('change', filterProperties);
+    priceRangeSelect.addEventListener('change', filterProperties);
+    statusSelect.addEventListener('change', filterProperties);
+    searchInput.addEventListener('input', filterProperties);
+
+    // Анимация при наведении на карточки имущества
+    const propertyCards = document.querySelectorAll('.property-card');
+    propertyCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+      });
+    });
+
+    // Имитация загрузки дополнительных объектов при нажатии на кнопки пагинации
+    const paginationButtons = document.querySelectorAll('.pagination button');
+    paginationButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        if (!button.disabled) {
+          alert('Загрузка дополнительных объектов имущества...');
+        }
+      });
+    });
+
+    // Обработка нажатия на карточку имущества
+    propertyCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const propertyTitle = card.querySelector('.property-title').textContent;
+        alert(`Переход на страницу объекта: ${propertyTitle}`);
+      });
+    });
+  </script>
+</body>
+</html>

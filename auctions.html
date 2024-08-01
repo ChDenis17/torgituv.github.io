@@ -1,0 +1,326 @@
+<html><head><base href="https://web.simulator.ru/torgi-inspired/auctions">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аукционы - Торги Онлайн</title>
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #333;
+  }
+  .header {
+    background: linear-gradient(135deg, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .logo {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .nav {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .nav a {
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  .nav a:hover, .nav a.active {
+    background-color: #e0e0e0;
+  }
+  .nav a.active {
+    font-weight: bold;
+    color: #2989d8;
+  }
+  .content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .filter-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .filter-group label {
+    margin-right: 10px;
+  }
+  .filter-group select, .filter-group input {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .auction-list {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .auction-list th, .auction-list td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  .auction-list th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  .auction-list tr:hover {
+    background-color: #f5f5f5;
+  }
+  .status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+  }
+  .status-active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  .status-upcoming {
+    background-color: #2196F3;
+    color: white;
+  }
+  .status-closed {
+    background-color: #f44336;
+    color: white;
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #2989d8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .pagination button:hover {
+    background-color: #1e5799;
+  }
+  .pagination button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  .auction-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .auction-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  .auction-card-header {
+    background-color: #f2f2f2;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  .auction-card-body {
+    padding: 15px;
+  }
+  .auction-card-footer {
+    background-color: #f2f2f2;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .bid-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .bid-button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Торги Онлайн</div>
+    <p>Электронная площадка для проведения торгов</p>
+  </header>
+  
+  <nav class="nav">
+      <a href="C:\Users\Пользователь\Downloads\Сайт\Main.html" class="active">Главная</a>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\auctions.html">Аукционы</a>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\tenders.html">Тендеры</a>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\property.html">Имущество</a>
+      <a href="C:\Users\Пользователь\Downloads\Сайт\about.html">О нас</a>
+  </nav>
+  
+  <main class="content">
+    <h1>Аукционы</h1>
+    
+    <div class="filters">
+      <div class="filter-group">
+        <label for="category">Категория:</label>
+        <select id="category">
+          <option value="all">Все категории</option>
+          <option value="real-estate">Недвижимость</option>
+          <option value="vehicles">Транспорт</option>
+          <option value="equipment">Оборудование</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="status">Статус:</label>
+        <select id="status">
+          <option value="all">Все статусы</option>
+          <option value="active">Активные</option>
+          <option value="upcoming">Предстоящие</option>
+          <option value="closed">Завершенные</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="search">Поиск:</label>
+        <input type="text" id="search" placeholder="Введите ключевое слово">
+      </div>
+    </div>
+    
+    <div id="auction-container">
+      <div class="auction-card">
+        <div class="auction-card-header">
+          Продажа земельного участка в Подмосковье
+        </div>
+        <div class="auction-card-body">
+          <p><strong>Категория:</strong> Недвижимость</p>
+          <p><strong>Начальная цена:</strong> 5 000 000 ₽</p>
+          <p><strong>Дата окончания:</strong> 15.06.2023</p>
+          <p><strong>Описание:</strong> Земельный участок площадью 15 соток в экологически чистом районе Подмосковья. Отличное место для строительства загородного дома.</p>
+        </div>
+        <div class="auction-card-footer">
+          <span class="status status-active">Активный</span>
+          <button class="bid-button">Сделать ставку</button>
+        </div>
+      </div>
+      
+      <div class="auction-card">
+        <div class="auction-card-header">
+          Аукцион по продаже автомобиля Toyota Camry
+        </div>
+        <div class="auction-card-body">
+          <p><strong>Категория:</strong> Транспорт</p>
+          <p><strong>Начальная цена:</strong> 1 500 000 ₽</p>
+          <p><strong>Дата окончания:</strong> 20.06.2023</p>
+          <p><strong>Описание:</strong> Toyota Camry 2020 года выпуска, пробег 30 000 км. Отличное состояние, полная комплектация.</p>
+        </div>
+        <div class="auction-card-footer">
+          <span class="status status-upcoming">Предстоящий</span>
+          <button class="bid-button" disabled>Сделать ставку</button>
+        </div>
+      </div>
+      
+      <div class="auction-card">
+        <div class="auction-card-header">
+          Продажа промышленного оборудования
+        </div>
+        <div class="auction-card-body">
+          <p><strong>Категория:</strong> Оборудование</p>
+          <p><strong>Начальная цена:</strong> 3 200 000 ₽</p>
+          <p><strong>Дата окончания:</strong> 10.06.2023</p>
+          <p><strong>Описание:</strong> Комплект промышленного оборудования для производства пластиковых изделий. В отличном рабочем состоянии.</p>
+        </div>
+        <div class="auction-card-footer">
+          <span class="status status-closed">Завершен</span>
+          <button class="bid-button" disabled>Торги завершены</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pagination">
+      <button disabled>←</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>→</button>
+    </div>
+  </main>
+
+  <script>
+    const categorySelect = document.getElementById('category');
+    const statusSelect = document.getElementById('status');
+    const searchInput = document.getElementById('search');
+    const auctionContainer = document.getElementById('auction-container');
+
+    function filterAuctions() {
+      const category = categorySelect.value;
+      const status = statusSelect.value;
+      const searchTerm = searchInput.value.toLowerCase();
+
+      const auctionCards = auctionContainer.querySelectorAll('.auction-card');
+
+      auctionCards.forEach(card => {
+        const cardCategory = card.querySelector('.auction-card-body p:first-child').textContent.toLowerCase();
+        const cardStatus = card.querySelector('.status').textContent.toLowerCase();
+        const cardText = card.textContent.toLowerCase();
+
+        const categoryMatch = category === 'all' || cardCategory.includes(category);
+        const statusMatch = status === 'all' || cardStatus.includes(status);
+        const searchMatch = searchTerm === '' || cardText.includes(searchTerm);
+
+        if (categoryMatch && statusMatch && searchMatch) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    categorySelect.addEventListener('change', filterAuctions);
+    statusSelect.addEventListener('change', filterAuctions);
+    searchInput.addEventListener('input', filterAuctions);
+
+    // Анимация при наведении на карточки аукционов
+    const auctionCards = document.querySelectorAll('.auction-card');
+    auctionCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+      });
+    });
+
+    // Имитация загрузки дополнительных аукционов при нажатии на кнопки пагинации
+    const paginationButtons = document.querySelectorAll('.pagination button');
+    paginationButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        if (!button.disabled) {
+          alert('Загрузка дополнительных аукционов...');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
